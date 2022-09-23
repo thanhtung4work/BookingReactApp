@@ -11,6 +11,9 @@
   max-width: 1024px;
   margin: 20px 0 100px 0;
 }
+.headerContainer.listMode {
+  margin: 20px 0 5px 0;
+}
 
 .headerList {
   display: flex;
@@ -23,8 +26,9 @@
   align-items: center;
   gap: 10px;
   padding-bottom: 10px;
+  cursor: pointer;
 }
-.headerListItem.active {
+.headerListItem.active, .headerListItem:hover {
   border-bottom: 4px solid white;
 }
 
@@ -34,6 +38,7 @@
 
 .headerDesc {
   margin: 5px 0 20px 0;
+  font-size: 22px;
 }
 
 .headerButton {
@@ -87,15 +92,17 @@
 .headerSearchDate {
   position: absolute;
   top: 60px;
+  z-index: 1;
 }
 
 .headerOptions {
   position: absolute;
-  top: 60px;
+  top: 70px;
   background-color: white;
   color:rgb(69, 69, 69);
   box-shadow: 5px 10px rgba(69, 69, 69, 0.2);
   border-radius: 4px;
+  z-index: 1;
 }
 
 .headerOptionItem {
@@ -119,4 +126,7 @@
   border: 4px solid rgb(190, 100, 100);
   border-radius: 4px;
   cursor: pointer;
+}
+.headerCounterButton:disabled {
+  cursor: not-allowed;
 }
