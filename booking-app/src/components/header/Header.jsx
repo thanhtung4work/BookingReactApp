@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBed, faPlaneUp, faCar, faMountainCity, faSearchLocation, faCalendarDays, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
+import { useNavigate } from "react-router-dom";
 
 const Header = ({type}) => {
+  const [destination, setDestination] = useState("");
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openPeopleOption, setOpenPeopleOption] = useState(false);
   const [peopleOption, setPeopleOption] = useState({
@@ -37,7 +39,12 @@ const Header = ({type}) => {
       };
     });
   };
+  
+  const navigate = useNavigate()
 
+  const handleSearch = () => {
+      navigate("/hotels",{state:{ destination, dateRange, peopleOption}})
+  }
   return (
     <div className="header">
       <div className={type==="list" ? "headerContainer listMode" : "headerContainer"}>
@@ -76,6 +83,7 @@ const Header = ({type}) => {
                 id="" 
                 placeholder="Địa điểm trong tâm trí của bạn?"
                 className="headerSearchInput"
+                onChange={e=>setDestination(e.target.value)}
               />
             </div>
             <div className="headerSearchItem">
@@ -92,6 +100,7 @@ const Header = ({type}) => {
                   moveRangeOnFirstSelection={false}
                   ranges={dateRange}
                   className="headerSearchDate"
+                  minDate={new Date()} 
                 />
               }
             </div>
@@ -161,7 +170,7 @@ const Header = ({type}) => {
               
             </div>
             <div className="headerSearchItem">
-              <button className="headerButton">Tìm</button>
+              <button className="headerButton" onClick={handleSearch}>Tìm</button>
             </div>
           </div>
           </>
