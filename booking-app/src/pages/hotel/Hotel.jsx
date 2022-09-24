@@ -2,11 +2,15 @@ import "./hotel.css"
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../footer/Footer";
+import { useState } from "react";
 
 const Hotel = () => {
+
+  const [slideNumber, setSlideNumber] = useState(0);
+  const [open, setOpen] = useState(false);
   const photos = [
     {
       src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrypA67CzphgEQLWGQSvXA89TqO438y3Co3w&usqp=CAU",
@@ -27,57 +31,77 @@ const Hotel = () => {
       src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMrhn0CUGCkO3bqUdvHFKkxjJ7WxeHk9WGPA&usqp=CAU",
     },
   ];
+const handleOpen = (i) =>{
+  setSlideNumber(i);
+  setOpen(true);
+}
+const handleMove = (direction) => {
+  let newSlideNumber;
+  if(direction === "l"){
+    newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+  }else{
+    newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+  }
+
+  setSlideNumber(newSlideNumber)
+};
+
   return (
     <div>
       <Navbar/>
       <Header type="list"/>
       <div className="hotelContainer">
+        {open && <div className="slider">
+            <FontAwesomeIcon icon={faCircleXmark} className="close" onClick={()=>setOpen(false)}/>
+            <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow" onClick={()=>handleMove("l")} />
+            <div className="sliderWrapper">
+              <img src={photos[slideNumber].src} alt="" className="sliderImg" />
+            </div>
+            <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" onClick={()=>handleMove("r")}/>
+        </div>}
         <div className="hotelWrapper">
-          <h1 className="hotelTitle">Khách sản thủ khoa</h1>
+          <button className="bookNow">Đặt ngay!!!</button>
+          <h1 className="hotelTitle">Địa bàn của thủ khoa</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faMapLocationDot}/>
-            <span>273 An Dương Vương</span>
+            <span>273 An Dương Vương ,Phường 3, Quận 5, Thành phố Hồ Chí Minh.</span>
           </div>
           <span className="hotelDistance">
-            cách trung tâm 100m
+            Cách trung tâm 100m
           </span>
           <span className="hotelPriceHighLight">
             Giá $999 bao gồm thuế và phí
           </span>
           <div className="hotelImages">
-                {photos.map(photo=>(
+                {photos.map((photo,i)=>(
                   <div className="hotelImgWrapper">
-                    <img src={photo.src} alt="" className="hotelImg" />
+                    <img onClick={()=>handleOpen(i)} src={photo.src} alt="" className="hotelImg" />
                   </div>
                 ))}
           </div>
           <div className="hotelDetails">
             <div className="hotelDetailsTexts">
-              <h1 className="hotelTitle">Stay in the heart of City</h1>
+              <h1 className="hotelTitle">Trong lòng thành phố</h1>
               <p className="hotelDesc">
-                Located a 5-minute walk from St. Florian's Gate in Krakow, Tower
-                Street Apartments has accommodations with air conditioning and
-                free WiFi. The units come with hardwood floors and feature a
-                fully equipped kitchenette with a microwave, a flat-screen TV,
-                and a private bathroom with shower and a hairdryer. A fridge is
-                also offered, as well as an electric tea pot and a coffee
-                machine. Popular points of interest near the apartment include
-                Cloth Hall, Main Market Square and Town Hall Tower. The nearest
-                airport is John Paul II International Kraków–Balice, 16.1 km
-                from Tower Street Apartments, and the property offers a paid
-                airport shuttle service.
+              Trường Đại học Sài Gòn là một cơ sở giáo dục đại học đa ngành trực thuộc Ủy ban Nhân dân TP.
+              Hồ Chí Minh, được thành lập theo Quyết định số 478/QĐ-TTg  ngày 25/04/2007 của Thủ tướng Nguyễn Tấn 
+              Dũng trên cơ sở nâng cấp từ Trường Cao đẳng Sư phạm Thành phố Hồ Chí Minh.Khoa Công nghệ Thông tin, 
+              Khoa Sư phạm Khoa học Tự nhiên, Khoa Sư phạm Khoa học Xã hội, Khoa Luật, Khoa Khoa học Môi trường, 
+              Khoa Thư viện - Văn phòng, Khoa Toán - Ứng dụng, Khoa Ngoại ngữ, Khoa Văn hóa và Du lịch, 
+              Khoa Điện tử - Viễn thông, Khoa Nghệ thuật, Khoa Giáo dục Chính trị, Khoa Giáo dục, 
+              Khoa Giáo dục Tiểu học.
               </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>Một nơi hoàn hảo!</h1>
               <span>
-                Located in the real heart of Krakow, this property has an
-                excellent location score of 9.8!
+                Một nơi hoàn hảo cho rèn luyện tinh thần và
+                sức chịu đựng của bản thân trước những thử thách!!!
               </span>
               <h2>
-                <b>$945</b> (9 nights)
+                <b>$999</b> (4 năm)
               </h2>
-              <button>Reserve or Book Now!</button>
+              <button>Đặt ngay!</button>
             </div>
           </div>
         </div>
