@@ -2,10 +2,12 @@ import "./searchItem.css"
 function SearchItem() {
   return (
     <div className="searchItem">
-        <img src="https://media-cdn.tripadvisor.com/media/photo-s/10/12/ce/06/20170724-071226-largejpg.jpg" 
-        alt="" 
-         className="siImg" />
-    <div className="siDesc">
+        <img 
+          src="https://media-cdn.tripadvisor.com/media/photo-s/10/12/ce/06/20170724-071226-largejpg.jpg" 
+          alt="" 
+          className="siImg" 
+        />
+      <div className="siDesc">
         <h1 className="siTitle">Căn hộ của thủ khoa</h1>
         <span className="siDistance">100m từ trung tâm</span>
         <span className="siTaxiOp">Taxi sân bay miễn phí</span>

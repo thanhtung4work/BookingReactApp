@@ -5,9 +5,9 @@ import { useLocation } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import SearchItem from "../../components/searchItem/SearchItem";
-import "./list.css" 
-const List = () => {
+import "./list.css";
 
+const List = () => {
   const location = useLocation()
   const [destination,setDestination] = useState(location.state.destination) 
   const [dateRange,setDateRange] = useState(location.state.dateRange) 
@@ -71,7 +71,7 @@ const List = () => {
               </div>
               </div>
             </div>
-            <button>Tìm kiế m</button>
+            <button>Tìm kiếm</button>
           </div>
           <div className="listResult">
                 <SearchItem/>

@@ -43,7 +43,7 @@ const Header = ({type}) => {
   const navigate = useNavigate()
 
   const handleSearch = () => {
-      navigate("/hotels",{state:{ destination, dateRange, peopleOption}})
+    navigate("/hotels",{state:{ destination, dateRange, peopleOption}})
   }
   return (
     <div className="header">

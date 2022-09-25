@@ -13,6 +13,7 @@
     width: 200px;
     height: 245px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
 .siDesc{
@@ -38,7 +39,7 @@
     background-color: #008009;
     color: white;
     width: max-content;
-    padding: 3px;
+    padding: 4px 8px;
     border-radius: 10px;
 }
 
