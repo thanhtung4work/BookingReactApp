@@ -2,6 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRouter from "./routes/auth.js";
+import userRouter from "./routes/auth.js";
+import roomRouter from "./routes/auth.js";
+import transactionRouter from "./routes/auth.js";
+import realEstateRouter from "./routes/auth.js";
 
 const app = express();
 dotenv.config();
