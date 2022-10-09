@@ -6,7 +6,7 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import BarChartIcon from '@mui/icons-material/BarChart';
-
+import {Link} from "react-router-dom";
 import "./sidebar.scss";
 
 const Sidebar = () => {
