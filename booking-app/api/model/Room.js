@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-var ObjectId = Schema.Object;
 const RoomSchema = new mongoose.Schema({
     idRealEstate: {
-        type: ObjectId,
+        type: String,
         require: true
     },  
     Slot: {
