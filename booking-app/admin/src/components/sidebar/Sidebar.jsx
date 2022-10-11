@@ -6,31 +6,42 @@ import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import BarChartIcon from '@mui/icons-material/BarChart';
-
+import {Link} from "react-router-dom";
 import "./sidebar.scss";
 
 const Sidebar = () => {
   return(
     <div className="sidebar">
       <div className="top">
-        <span className="logo">Underseadmin</span>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <span className="logo">Underseadmin</span>
+        </Link>
+        
       </div>
       <hr />
       <div className="center">
         <ul>
           <p className="title">CHỨC NĂNG</p>
-          <li>
-            <DashboardIcon className='icon'/>
-            <span>Trang chủ</span>
-          </li>
-          <li>
-            <PeopleIcon  className='icon'/>
-            <span>Người dùng</span>
-          </li>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className='icon'/>
+              <span>Trang chủ</span>
+            </li> 
+          </Link>
+
+          <Link to="/users" style={{ textDecoration: "none" }}>
+            <li>
+              <PeopleIcon  className='icon'/>
+              <span>Người dùng</span>
+            </li>
+          </Link>
+
+          <Link to="/items" style={{ textDecoration: "none" }}>
           <li>
             <MapsHomeWorkIcon  className='icon'/>
             <span>Phòng</span>
           </li>
+          </Link>
           <li>
             <MeetingRoomIcon  className='icon'/>
             <span>Đơn đặt</span>
