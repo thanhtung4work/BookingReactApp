@@ -23,12 +23,28 @@ mongoose.connection.on("disconnected", () => {
   console.log("mongoDB disconnected!");
 });
 
-app.use(json());
+// API
+app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/room", roomRouter);
 app.use("/api/user", userRouter);
 app.use("/api/transaction", transactionRouter);
 app.use("/api/realestate", realEstateRouter);
+
+// Error Middleware 
+
+app.use((err, req, res, next) => {
+  const statusErr = err.status || 500;
+  const messageErr = err.message || "Something went wrong!!!";
+  return res.status(statusErr).json({
+    success: false,
+    status: statusErr,
+    message: messageErr,
+    stack: err.stack
+  });
+})
+
+
 app.listen(9090, () => {
   connect();
   console.log("Started!");
