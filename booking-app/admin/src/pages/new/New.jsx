@@ -30,7 +30,7 @@ const New = ({inputs, title}) => {
             <form>
             <div className="formInput">
                 <label htmlFor="file">Hình ảnh:<DriveFolderUploadOutlinedIcon className="icon"/></label>
-                <input type="file" name="" onChange={e=>setFile(e.target.files[0])} id="file" style={{display:"none"}}/>
+                <input type="file" name="" onChange={e=>setFile(e.target.files[0])} id="file" style={{display:"none"}} accept="Image/*"/>
               </div>
 
               {inputs.map((input) => (
