@@ -37,7 +37,9 @@ const UserSchema = new mongoose.Schema({
     },
     Username: {
         type: String,
-        require: true
+        require: true,
+        unique: true,
+        dropDups: true
     }, 
     Password: {
         type: String,
