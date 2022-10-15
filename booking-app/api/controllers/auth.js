@@ -1,7 +1,7 @@
 import User from "../model/User.js";
 import sercutity from "bcrypt";
 import { createError } from "../utils/error.js";
-
+import jwt from "jsonwebtoken";
 
 
 export const register = async (req, res, next) => {
@@ -32,8 +32,12 @@ export const login = async (req, res, next) => {
              user.Password
              );
         if (!password) return next(createError(404, "Wrong password or username"));
-       const {Password, Role, ...otherInformation} = user._doc;
-        res.status(200).json({...otherInformation});
+        const token = jwt.sign({id: user._id, Role: user.Role}, process.env.JWT_KEY)
+        const {Password, Role, ...otherInformation} = user._doc;
+
+        res.cookie("token", token, {httpOnly: true})
+        .status(200)
+        .json({...otherInformation});
 
     } catch (error) {
         return next(error);

@@ -6,6 +6,7 @@ import userRouter from "./routes/users.js";
 import roomRouter from "./routes/rooms.js";
 import transactionRouter from "./routes/transaction.js";
 import realEstateRouter from "./routes/real-estate.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 dotenv.config();
@@ -24,6 +25,7 @@ mongoose.connection.on("disconnected", () => {
 });
 
 // API
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/room", roomRouter);
