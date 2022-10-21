@@ -14,25 +14,16 @@ export const verifyToken = (req, res, next) => {
   };
   export const verifyUser = (req, res, next) => {
     verifyToken(req, res, () => {
-        if (req.params.id === req.user.id || req.user.Role == "Admin" ||  req.user.Role == "Staff") {
+        if (req.params.id === req.user.id || req.user.IsAdmin ) {
           next();
         } else {
           return next(createError(403, "You are not authorized!"));
         }
     });
   }
-  export const verifyStaff = (req, res, next) => {
-    verifyToken(req, res, () => {
-      if (req.user.Role === "Staff") {
-        next();
-      } else {
-        return next(createError(403, "You are not authorized!"));
-      }
-    });
-  };
   export const verifyAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
-      if (req.user.Role === "Admin") {
+      if (req.user.IsAdmin) {
         next();
       } else {
         return next(createError(403, "You are not authorized!"));

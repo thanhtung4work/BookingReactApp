@@ -11,7 +11,7 @@ router.post("/", createRoom);
 
 //Delete
 
-router.delete("/:id",verifyStaff, deleteRoom);
+router.delete("/:id", deleteRoom);
 
 //Update
 router.put("/:id", updateRoom);

@@ -6,27 +6,50 @@ const RealEstateSchema = new mongoose.Schema({
     Name: {
         type: String,
         require: true
-    },  
+    },
+    Type: {
+        type: String,
+        require: true
+    },
+    City: {
+        type: String,
+        require: true
+    }, 
     Address: {
         type: String,
         require: true
     }, 
-    Detail: {
+    Distance: {
         type: String,
         require: true
     }, 
-    Type: {
-        type: String,
-        require: true
-    }, 
-    Img: {
+    Photos: {
         type: [String],
+    },
+    Title: {
+        type: String,
         require: true
     }, 
+    Desc: {
+        type: String,
+        require: true
+    },
+    Rating: {
+        type: Number,
+        min: 0,
+        max: 5,
+    },  
+    Rooms: {
+        type: [String],
+      },
     LowPrice: {
         type: Number,
         require: true
-    }
+    },
+    Featured: {
+        type: Boolean,
+        default: false,
+      }
 
 });
 

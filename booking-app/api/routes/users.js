@@ -22,7 +22,7 @@ router.get("/authorizedAdmin",verifyAdmin, (req, res, next) => {
 // Create
 router.post("/", createUser);
 //Delete
-router.delete("/:id",verifyStaff, deleteUser);
+router.delete("/:id", deleteUser);
 //Update
 router.put("/:id", updateUser);
 //Get by id

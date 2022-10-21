@@ -14,5 +14,4 @@ router.get("/:id", getTransaction);
 //Get all
 router.get("/", getTransactionAll);
 
-
 export default router;

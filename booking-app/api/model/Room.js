@@ -2,27 +2,25 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const RoomSchema = new mongoose.Schema({
-    idRealEstate: {
+    Title: {
         type: String,
         require: true
-    },  
-    Slot: {
-        type: Number,
-        require: true
-    }, 
+    },
     Price: {
         type: Number,
         require: true
-    }, 
-    checkoutDate: {
-        type: Date,
+    },   
+    MaxPeople: {
+        type: Number,
         require: true
     }, 
-    status: {
+    Desc: {
         type: String,
         require: true
-    }
-
-});
+    },
+    RoomNumbers: [{ number: Number, unavailableDates: {type: [Date]}}],
+},
+    {timestamps: true}
+);
 
 export default mongoose.model("Room", RoomSchema);

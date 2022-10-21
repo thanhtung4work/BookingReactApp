@@ -11,45 +11,42 @@ const UserSchema = new mongoose.Schema({
         type: String,
         require: true
     }, 
-    BirthDate: {
-        type: Date,
-        require: true
-    }, 
-    NationalID: {
-        type: [String],
-        require: true
-    }, 
-    Email: {
-        type: String,
-        require: true
-    }, 
-    Phone: {
-        type: String,
-        require: true
-    },
-    Avatar: {
-        type: String,
-        require: true
-    },
-    Role: {
-        type: String,
-        require: true
-    },
     Username: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
-        dropDups: true
-    }, 
+      },
+    Email: {
+        type: String,
+        required: true,
+        unique: true,
+      },
+    Country: {
+        type: String,
+        required: true,
+      },
+    Img: {
+        type: String,
+      },
+    City: {
+        type: String,
+        required: true,
+      },
+    Phone: {
+        type: String,
+        required: true,
+      },
     Password: {
         type: String,
-        require: true
+        required: true,
+      },
+    IsAdmin: {
+        type: Boolean,
+        default: false,
+      },
     },
-    Address: {
-        type: String,
-        require: true
-    }
+    { timestamps: true }
 
-});
+);
 
 export default mongoose.model("User", UserSchema);
