@@ -42,7 +42,7 @@ const RealEstateSchema = new mongoose.Schema({
     Rooms: {
         type: [String],
       },
-    LowPrice: {
+      CheapestPrice: {
         type: Number,
         require: true
     },
