@@ -1,16 +1,7 @@
 import User from "../model/User.js";
 
 //CREATE
-export const createUser = async(req, res, next) => {
-    const requestUser = new User(req.body);
-    try {
-        
-        const saveUser = await requestUser.save();
-        res.status(200).json(saveUser); 
-    } catch (error) {
-        next(error);
-    }
-};
+
 
 //READ
 export const getUser = async(req, res, next) => {
