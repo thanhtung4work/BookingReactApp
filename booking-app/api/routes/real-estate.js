@@ -13,7 +13,7 @@ router.delete("/:id",verifyAdmin,deleteRealEstate);
 router.put("/:id",verifyAdmin,updateRealEstate);
 
 //Get by id
-router.get("/:id", getRealEstate);
+router.get("/find/:id", getRealEstate);
 
 //Get all
 router.get("/", getRealEstates);

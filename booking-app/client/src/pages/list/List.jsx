@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import SearchItem from "../../components/searchItem/SearchItem";
+import useFetch from "../../hooks/useFetch";
 import "./list.css";
 
 const List = () => {
@@ -13,6 +14,16 @@ const List = () => {
   const [dateRange,setDateRange] = useState(location.state.dateRange) 
   const [openDateRange,setOpenDateRange] = useState(false) 
   const [peopleOption, setPeopleOption] = useState(location.state.peopleOption) 
+  const [min, setMin] = useState(undefined) 
+  const [max, setMax] = useState(undefined) 
+  const { data, loading, error, reFetch } = useFetch(
+    `/realestate?City=${destination}&min=${min || 0 }&max=${max || 999}`
+    );
+
+  const handleClick = () => {
+    reFetch();
+  };
+  console.log(`/realestate?City=${destination}}`)
   return(
     <div>
       <Navbar/>
@@ -23,7 +34,7 @@ const List = () => {
             <h1 className="lsTitle">Tìm kiếm</h1>
             <div className="lsItem">
               <label>Điểm đến</label>
-              <input placeholder={destination} type="text" />
+              <input placeholder={destination} onChange={e=>setDestination(e.target.value)} type="text" />
             </div>
             <div className="lsItem">
               <label>Ngày nhận phòng</label>
@@ -43,13 +54,13 @@ const List = () => {
                 <span className="lsOptionText">
                   Giá thấp nhất/đêm
                 </span>
-                <input type="number" className="lsOptionInput" />
+                <input type="number" min="1" onChange={e=>setMin(e.target.value)} className="lsOptionInput" />
               </div>
               <div className="lsOptionItem">
                 <span className="lsOptionText">
                   Giá tốt nhất/đêm
                 </span>
-                <input type="number" className="lsOptionInput" />
+                <input type="number" min="1" onChange={e=>setMax(e.target.value)} className="lsOptionInput" />
               </div>
               <div className="lsOptionItem">
                 <span className="lsOptionText">
@@ -71,17 +82,17 @@ const List = () => {
               </div>
               </div>
             </div>
-            <button>Tìm kiếm</button>
+            <button onClick={handleClick}>Tìm kiếm</button>
           </div>
           <div className="listResult">
-                <SearchItem/>
-                <SearchItem/>
-                <SearchItem/>
-                <SearchItem/>
-                <SearchItem/>
-                <SearchItem/>
-                <SearchItem/>
-                <SearchItem/>
+                {loading ? "loading" : 
+                <>
+                {data.map(item =>(
+                  <SearchItem item={item} key={item._id}/>
+                ))}
+                
+                </>}
+                
           </div>
                 
         </div> 

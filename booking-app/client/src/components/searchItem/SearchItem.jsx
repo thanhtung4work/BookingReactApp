@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import "./searchItem.css"
-function SearchItem() {
+function SearchItem({item}) {
   return (
     <div className="searchItem">
         <img 
-          src="https://media-cdn.tripadvisor.com/media/photo-s/10/12/ce/06/20170724-071226-largejpg.jpg" 
+          src={item.Photos[0]}    
           alt="" 
           className="siImg" 
         />
       <div className="siDesc">
-        <h1 className="siTitle">Căn hộ của thủ khoa</h1>
-        <span className="siDistance">100m từ trung tâm</span>
+        <h1 className="siTitle">{item.Name}</h1>
+        <span className="siDistance">{item.Distance}</span>
         <span className="siTaxiOp">Taxi sân bay miễn phí</span>
         <span className="siSubtitle">
           Căn hộ hiện đại đầy đủ tiện nghi
@@ -23,14 +24,16 @@ function SearchItem() {
         </span>
       </div>
        <div className="siDetails">
-        <div className="siRating">
+       {item.Rating && <div className="siRating">
           <span>Tuyệt vời</span>
-          <button>10.0</button>
-        </div>
+          <button>{item.Rating}</button>
+        </div>}
         <div className="siDetailTexts">
-          <span className="siPrice">$9999</span>
+          <span className="siPrice">{item.CheapestPrice}</span>
           <span className="siTaxOp">Gồm thuế và phí</span>
+          <Link to={`/hotels/${item._id}`}>
           <button className="siCheckButton">Còn trống !!</button>
+          </Link>
         </div>
       </div> 
     </div>

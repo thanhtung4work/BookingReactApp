@@ -1,51 +1,36 @@
+import useFetch from "../../hooks/useFetch";
 import "./featuredProperties.css"
 
 
 const FeaturedProperties = () => {
+   const {data, loading, error} = useFetch("/realestate?Featured=true&limit=4");
+   console.log(data);
   return(
-    <div  className="fp">
-      <div className="fpItem">
-        <img src="https://cf.bstatic.com/xdata/images/hotel/square200/116897997.webp?k=21d951ae1dd642b2224f8ee53a53b2d2b92ba844c3dc60e5fa2549bb8ac44de4&o=" alt="" className="fpImg"/>
-        <span className="fpName">The reverie Saigon</span>
-        <span className="fpCity">TP. Ho Chi Minh</span>
-        <span className="fpPrice">Từ 5.000.000đ</span>
-        <div className="fpRating">
-          <button>8.5</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src="https://cf.bstatic.com/xdata/images/hotel/square200/116897997.webp?k=21d951ae1dd642b2224f8ee53a53b2d2b92ba844c3dc60e5fa2549bb8ac44de4&o=" alt="" className="fpImg"/>
-        <span className="fpName">The reverie Saigon</span>
-        <span className="fpCity">TP. Ho Chi Minh</span>
-        <span className="fpPrice">Từ 5.000.000đ</span>
-        <div className="fpRating">
-          <button>8.5</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src="https://cf.bstatic.com/xdata/images/hotel/square200/116897997.webp?k=21d951ae1dd642b2224f8ee53a53b2d2b92ba844c3dc60e5fa2549bb8ac44de4&o=" alt="" className="fpImg"/>
-        <span className="fpName">The reverie Saigon</span>
-        <span className="fpCity">TP. Ho Chi Minh</span>
-        <span className="fpPrice">Từ 5.000.000đ</span>
-        <div className="fpRating">
-          <button>8.5</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-      <div className="fpItem">
-        <img src="https://cf.bstatic.com/xdata/images/hotel/square200/116897997.webp?k=21d951ae1dd642b2224f8ee53a53b2d2b92ba844c3dc60e5fa2549bb8ac44de4&o=" alt=""  className="fpImg"/>
-        <span className="fpName">The reverie Saigon</span>
-        <span className="fpCity">TP. Ho Chi Minh</span>
-        <span className="fpPrice">Từ 5.000.000đ</span>
-        <div className="fpRating">
-          <button>8.5</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-    </div>
-  )
+    <div className="fp">
+    {loading ? (
+      "Loading"
+    ) : (
+      <>
+        {data.map((item) => (
+          <div className="fpItem" key={item._id}>
+            <img
+              src={item.Photos[0]}         
+              alt=""
+              className="fpImg"
+            />
+            <span className="fpName">{item.Name}</span>
+            <span className="fpCity">{item.City}</span>
+            <span className="fpPrice">Starting from ${item.CheapestPrice}</span>
+            {item.Rating && <div className="fpRating">
+              <button>{item.Rating}</button>
+              <span>Excellent</span>
+            </div>}
+          </div>
+        ))}
+      </>
+    )}
+  </div>
+);
 };
 
 export default FeaturedProperties;
