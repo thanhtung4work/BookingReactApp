@@ -5,17 +5,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../footer/Footer";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
 
 const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  console.log(`${id}`)
+  
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const { data, loading, error } = useFetch(`/realestate/find/${id}`);
+  const { dateRanges, peopleOption } = useContext(SearchContext);
+  console.log(dateRanges);
+
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+  const days = dayDifference(dateRanges[0].endDate,dateRanges[0].startDate);
   
 const handleOpen = (i) =>{
   setSlideNumber(i);
@@ -80,7 +91,7 @@ const handleMove = (direction) => {
                 sức chịu đựng của bản thân trước những thử thách!!!
               </span>
               <h2>
-                <b>$999</b> (4 năm)
+                <b>{days * data.CheapestPrice * peopleOption.room}</b> ({days})
               </h2>
               <button>Đặt ngay!</button>
             </div>

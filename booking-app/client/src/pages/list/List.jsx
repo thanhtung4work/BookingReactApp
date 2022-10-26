@@ -1,17 +1,18 @@
 import { format } from "date-fns/esm";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import SearchItem from "../../components/searchItem/SearchItem";
+import { SearchContext } from "../../context/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import "./list.css";
 
 const List = () => {
   const location = useLocation()
   const [destination,setDestination] = useState(location.state.destination) 
-  const [dateRange,setDateRange] = useState(location.state.dateRange) 
+  const [dateRanges,setDateRanges] = useState(location.state.dateRanges) 
   const [openDateRange,setOpenDateRange] = useState(false) 
   const [peopleOption, setPeopleOption] = useState(location.state.peopleOption) 
   const [min, setMin] = useState(undefined) 
@@ -23,7 +24,24 @@ const List = () => {
   const handleClick = () => {
     reFetch();
   };
-  console.log(`/realestate?City=${destination}}`)
+
+  const { dispatch } = useContext(SearchContext)
+  const  handleOption = (e) => {
+    let num = parseInt(e.target.value);
+    if(isNaN(num)) num = "";
+    setPeopleOption(prev => {
+      return {
+        ...prev,
+        [e.target.name]: num
+        
+      };
+    });
+  };
+  useEffect(()=> {
+    dispatch({type:"NEW_SEARCH",payload:{destination, dateRanges, peopleOption}})
+  },[peopleOption])
+  
+  
   return(
     <div>
       <Navbar/>
@@ -39,12 +57,12 @@ const List = () => {
             <div className="lsItem">
               <label>Ngày nhận phòng</label>
               <span onClick={() =>setOpenDateRange(!openDateRange)}>
-                {`${format(dateRange[0].startDate, "dd/MM/yyyy")} - ${format(dateRange[0].endDate, "dd/MM/yyyy")}`}
+                {`${format(dateRanges[0].startDate, "dd/MM/yyyy")} - ${format(dateRanges[0].endDate, "dd/MM/yyyy")}`}
               </span>
               {openDateRange &&<DateRange 
-                  onChange={(item) => setDateRange([item.selection])} 
+                  onChange={(item) => setDateRanges([item.selection])} 
                   minDate={new Date()}  
-                  ranges={dateRange} 
+                  ranges={dateRanges} 
                 />}
             </div>
             <div className="lsItem">
@@ -66,19 +84,19 @@ const List = () => {
                 <span className="lsOptionText">
                   Người lớn 
                 </span>
-                <input type="number" min={1} className="lsOptionInput" placeholder={peopleOption.adult} />
+                <input type="number" min={1} className="lsOptionInput" onChange={e => handleOption(e.target.value)} name="adult" value={peopleOption.adult} placeholder={peopleOption.adult} />
               </div>
               <div className="lsOptionItem">
                 <span className="lsOptionText">
                   Trẻ em
                 </span>
-                <input type="number" min={0} className="lsOptionInput" placeholder={peopleOption.children}/>
+                <input type="number" min={0} className="lsOptionInput" onChange={handleOption} name="children" value={peopleOption.children} placeholder={peopleOption.children}/>
               </div>
               <div className="lsOptionItem">
                 <span className="lsOptionText">
                   Số phòng
                 </span>
-                <input type="number" min={1} className="lsOptionInput" placeholder={peopleOption.room}/>
+                <input type="number" min={1} className="lsOptionInput" onChange={handleOption} name="room" value={peopleOption.room} placeholder={peopleOption.room}/>
               </div>
               </div>
             </div>
