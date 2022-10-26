@@ -7,8 +7,10 @@ import MailList from "../../components/mailList/MailList";
 import Footer from "../../footer/Footer";
 import { useContext, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+import Reverse from "../../components/reverse/Reverse";
 
 const Hotel = () => {
   const location = useLocation();
@@ -16,9 +18,10 @@ const Hotel = () => {
   
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const { data, loading, error } = useFetch(`/realestate/find/${id}`);
   const { dateRanges, peopleOption } = useContext(SearchContext);
-  console.log(dateRanges);
+  
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -26,22 +29,37 @@ const Hotel = () => {
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
-  const days = dayDifference(dateRanges[0].endDate,dateRanges[0].startDate);
-  
-const handleOpen = (i) =>{
-  setSlideNumber(i);
-  setOpen(true);
-}
-const handleMove = (direction) => {
-  let newSlideNumber;
-  if(direction === "l"){
-    newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
-  }else{
-    newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
-  }
 
-  setSlideNumber(newSlideNumber)
-};
+  let days = 0;
+  
+  if(dateRanges.length !== 0){
+     days = dayDifference(dateRanges[0].endDate,dateRanges[0].startDate);
+  }
+  
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleOpen = (i) =>{
+    setSlideNumber(i);
+    setOpen(true);
+  }
+  const handleMove = (direction) => {
+    let newSlideNumber;
+    if(direction === "l"){
+      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+    }else{
+      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+    }
+
+    setSlideNumber(newSlideNumber)
+  };
+
+    const handleClick = () => {
+      if(user){
+        setOpenModal(true);
+      }else {
+        navigate("/login");
+      }
+    }
 
   return (
     <div>
@@ -93,13 +111,14 @@ const handleMove = (direction) => {
               <h2>
                 <b>{days * data.CheapestPrice * peopleOption.room}</b> ({days})
               </h2>
-              <button>Đặt ngay!</button>
+              <button onClick={handleClick}>Đặt ngay!</button>
             </div>
           </div>
         </div>
         <MailList />
         <Footer />
       </div>)}
+      {openModal && <Reverse setOpen={setOpenModal} hotelId={id} />}
     </div>
   );
 };

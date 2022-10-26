@@ -8,6 +8,7 @@ import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({type}) => {
   const [destination, setDestination] = useState("");
@@ -40,7 +41,7 @@ const Header = ({type}) => {
       };
     });
   };
-  
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate()
   const { dispatch } = useContext(SearchContext)
   const handleSearch = () => {
@@ -75,7 +76,7 @@ const Header = ({type}) => {
           <p className="headerDesc">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti recusandae expedita officiis. Odio veniam quasi illum maxime ipsam corporis! Nisi vel quae aliquid sunt totam.
           </p>
-          <button className="headerButton">Đăng ký / Đăng xuất</button>
+          {!user && <button className="headerButton">Đăng ký / Đăng xuất</button>}
           <div className="headerSearch">
             <div className="headerSearchItem">
               <FontAwesomeIcon icon={faSearchLocation} className="headerSearchIcon"/>

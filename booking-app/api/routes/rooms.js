@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Create
 
-router.post("/", verifyAdmin, createRoom);
+router.post("/:realestateid", verifyAdmin, createRoom);
 
 //Delete
 
