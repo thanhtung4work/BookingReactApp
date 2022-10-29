@@ -24,16 +24,17 @@ export const login = async (req, res, next) => {
         const user = await User.findOne({Username: req.body.Username});
         if (!user) return next(createError(404, "User not exist"));
         const password = await sercutity.compare(
-             req.body.Password,
-             user.Password
-             );
+            req.body.Password,
+            user.Password
+            );
         if (!password) return next(createError(404, "Wrong password or username"));
         const token = jwt.sign({id: user._id, IsAdmin: user.IsAdmin}, process.env.JWT_KEY)
-        const {Password, Role, ...otherInformation} = user._doc;
+        
+        const {Password, IsAdmin, ...otherInformation} = user._doc;
 
         res.cookie("token", token, {httpOnly: true})
         .status(200)
-        .json({...otherInformation});
+        .json({details: {...otherInformation}, IsAdmin});
 
     } catch (error) {
         return next(error);

@@ -17,9 +17,10 @@ const List = () => {
   const [peopleOption, setPeopleOption] = useState(location.state.peopleOption) 
   const [min, setMin] = useState(undefined) 
   const [max, setMax] = useState(undefined) 
+  
   const { data, loading, error, reFetch } = useFetch(
     `/realestate?City=${destination}&min=${min || 0 }&max=${max || 999}`
-    );
+  );
 
   const handleClick = () => {
     reFetch();

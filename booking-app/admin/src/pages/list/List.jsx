@@ -2,13 +2,13 @@ import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./list.scss";
 import Datatable from "../../components/datatable/Datatable";
-const List = () => {
+const List = ({columns}) => {
   return (
     <div className="list">
       <Sidebar/>
       <div className="listContainer">
         <Navbar/>
-        <Datatable/>
+        <Datatable columns={columns}/>
       </div>
       
     </div>
