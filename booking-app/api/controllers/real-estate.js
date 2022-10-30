@@ -28,7 +28,7 @@ export const getRealEstates = async(req, res, next) => {
   try {
     const realestates = await RealEstate.find({
       ...others,
-      CheapestPrice: { $gt: min | 1, $lt: max || 999 },
+      CheapestPrice: { $gt: min | 1, $lt: max || 999999999 },
     }).limit(req.query.limit);
     res.status(200).json(realestates);
   } catch (err) {

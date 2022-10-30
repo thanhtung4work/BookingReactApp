@@ -1,17 +1,32 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesource";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
+import axios from "axios";
 
-const Datatable = () => {
+const Datatable = ({columns}) => {
   // const [data, setData] = useState(userRows);
-  const {data, loading, error} = useFetch("/user");
-  console.log(data)
+  const location = useLocation();
+  const path = location.pathname.split("/")[1];
+  const {data, loading, error} = useFetch(`/${path}`);
+  const [itemList, setList] = useState(data);
 
-  const handleDelete = (id) => {
-    // setData(data.filter((item) => item.id !== id));
+  useEffect(() => {
+    setList(data);
+  }, [data]);
+
+
+  const handleDelete = async (id) => {
+    try{
+      await axios.delete(`/${path}/${id}`);
+      setList(itemList.filter((item) => item._id !== id));
+    }
+    catch (err) {
+      console.log(err);
+    }
+    
   };
 
   const actionColumn = [
@@ -22,12 +37,12 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            <Link to="/user/test" style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
             <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             >
               Delete
             </div>
@@ -39,15 +54,15 @@ const Datatable = () => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
-        <Link to="/users/new" className="link">
+        Add New
+        <Link to={`/${path}/new`} className="link">
           Add New
         </Link>
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
+        rows={itemList}
+        columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

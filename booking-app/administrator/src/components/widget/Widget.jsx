@@ -4,6 +4,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   let data;
@@ -18,6 +19,7 @@ const Widget = ({ type }) => {
         title: "USERS",
         isMoney: false,
         link: "See all users",
+        destination: "/user",
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -34,6 +36,7 @@ const Widget = ({ type }) => {
         title: "ORDERS",
         isMoney: false,
         link: "View all orders",
+        destination: "/order",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -56,7 +59,9 @@ const Widget = ({ type }) => {
         <span className="counter">
           {data.isMoney && "$"} {amount}
         </span>
+        <Link to={data.destination} style={{ textDecoration: "none" }}>
         <span className="link">{data.link}</span>
+        </Link>
       </div>
       <div className="right">
         <div className="percentage positive">

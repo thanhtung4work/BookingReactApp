@@ -1,77 +1,128 @@
 export const userInputs = [
     {
-      id: 1,
+      id: "Username",
       label: "Username",
       type: "text",
-      placeholder: "john_doe",
+      placeholder: "username"
     },
     {
-      id: 2,
-      label: "Name and surname",
-      type: "text",
-      placeholder: "John Doe",
-    },
-    {
-      id: 3,
+      id: "Email",
       label: "Email",
-      type: "mail",
-      placeholder: "john_doe@gmail.com",
+      type: "email",
+      placeholder: "youremail@email.com"
     },
     {
-      id: 4,
-      label: "Phone",
+      id: "Lastname",
+      label: "Last Name",
       type: "text",
-      placeholder: "+1 234 567 89",
+      placeholder: "last name"
     },
     {
-      id: 5,
+      id: "Firstname",
+      label: "First Name",
+      type: "text",
+      placeholder: "first name"
+    },
+    {
+      id: "Phone",
+      label: "Phone Number",
+      type: "text",
+      placeholder: "+1 234 567 89"
+    },
+    {
+      id: "Password",
       label: "Password",
       type: "password",
+      placeholder: ""
     },
     {
-      id: 6,
-      label: "Address",
-      type: "text",
-      placeholder: "Elton St. 216 NewYork",
-    },
-    {
-      id: 7,
+      id: "Country",
       label: "Country",
       type: "text",
-      placeholder: "USA",
+      placeholder: "country"
     },
-  ];
+    {
+      id: "City",
+      label: "City",
+      type: "text",
+      placeholder: "city"
+    }
+];
   
-  export const productInputs = [
-    {
-      id: 1,
-      label: "Title",
-      type: "text",
-      placeholder: "Apple Macbook Pro",
-    },
-    {
-      id: 2,
-      label: "Description",
-      type: "text",
-      placeholder: "Description",
-    },
-    {
-      id: 3,
-      label: "Category",
-      type: "text",
-      placeholder: "Computers",
-    },
-    {
-      id: 4,
-      label: "Price",
-      type: "text",
-      placeholder: "100",
-    },
-    {
-      id: 5,
-      label: "Stock",
-      type: "text",
-      placeholder: "in stock",
-    },
-  ];
-  
+export const realEstateInputs = [
+  {
+    id: "Name",
+    label: "Name",
+    type: "text",
+    placeholder: "name"
+  },
+  {
+    id: "Type",
+    label: "Type",
+    type: "text",
+    placeholder: "type"
+  },
+  {
+    id: "City",
+    label: "City",
+    type: "text",
+    placeholder: "city"
+  },
+  {
+    id: "Address",
+    label: "Adress",
+    type: "text",
+    placeholder: ""
+  },
+  {
+    id: "Distance",
+    label: "Distance from city center",
+    type: "text",
+    placeholder: ""
+  },
+  {
+    id: "Title",
+    label: "Title",
+    type: "text",
+    placeholder: ""
+  },
+  {
+    id: "Desc",
+    label: "Description",
+    type: "text",
+    placeholder: ""
+  },
+  {
+    id: "CheapestPrice",
+    label: "Cheapest price",
+    type: "text",
+    placeholder: ""
+  }
+];
+
+export const roomInputs = [
+  {
+    id: "Title",
+    label: "Room title",
+    type: "text",
+    placeholder: ""
+  },
+  {
+    id: "Price",
+    label: "Room price",
+    type: "number",
+    placeholder: ""
+  },
+  {
+    id: "Desc",
+    label: "Description",
+    type: "text",
+    placeholder: ""
+  },
+  {
+    id: "MaxPeople",
+    label: "Max people",
+    type: "number",
+    placeholder: ""
+  }
+]

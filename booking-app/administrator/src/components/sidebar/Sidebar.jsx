@@ -31,20 +31,26 @@ const Sidebar = () => {
           <Link to="/" style={{ textDecoration: "none" }}>
             <li>
               <DashboardIcon className="icon" />
-              <span>Dashboard</span>
+              <span>Trang chủ</span>
             </li>
           </Link>
           <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          <Link to="/user" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Users</span>
+              <span>Người dùng</span>
             </li>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/realestate" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
-              <span>Hotels</span>
+              <span>Địa điểm</span>
+            </li>
+          </Link>
+          <Link to="/room" style={{ textDecoration: "none" }}>
+            <li>
+              <StoreIcon className="icon" />
+              <span>Phòng</span>
             </li>
           </Link>
           <li>
