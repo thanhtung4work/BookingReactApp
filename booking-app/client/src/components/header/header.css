@@ -1,0 +1,142 @@
+.header {
+  background-color:rgb(190, 100, 100);
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.headerContainer {
+  width: 100%;
+  max-width: 1024px;
+  margin: 20px 0 100px 0;
+}
+.headerContainer.listMode {
+  margin: 20px 0 5px 0;
+}
+
+.headerList {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+.headerListItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.headerListItem.active, .headerListItem:hover {
+  border-bottom: 4px solid white;
+}
+
+.headerTitle{
+  margin-top: 20px;
+}
+
+.headerDesc {
+  margin: 5px 0 20px 0;
+  font-size: 22px;
+}
+
+.headerButton {
+  padding: 10px 15px;
+  background-color: rgb(240, 200, 200);
+  color: rgb(190, 100, 100);
+  border: 0;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.headerSearch {
+  height: 40px;
+  padding: 10px 5px;
+  margin: 0 auto;
+  background-color: white;
+  border: 4px solid rgb(100, 100, 255);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  position: absolute;
+  bottom: -30px;
+  right: 0;
+  left: 0;
+  max-width: 1024px;
+}
+
+.headerSearchIcon {
+  color: rgb(69, 69, 69);
+}
+
+.headerSearchItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerSearchInput {
+  border: 0;
+  outline: none;
+  font-size: 14px;
+}
+
+.headerSearchText {
+  color: rgb(69, 69, 69);
+  cursor: pointer;
+}
+
+.headerSearchDate {
+  position: absolute;
+  top: 60px;
+  z-index: 1;
+}
+
+.headerOptions {
+  position: absolute;
+  top: 70px;
+  background-color: white;
+  color:rgb(69, 69, 69);
+  box-shadow: 5px 10px rgba(69, 69, 69, 0.2);
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.headerOptionItem {
+  width: 240px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+
+.headerOptionItem .counter{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.headerCounterButton {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border: 4px solid rgb(190, 100, 100);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.headerCounterButton:disabled {
+  cursor: not-allowed;
+}
+
+
+.close{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  color: lightgray;
+  cursor: pointer;
+}
